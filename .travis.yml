@@ -17,6 +17,13 @@ jobs:
         - yarn -v
         
     - stage: release
+      name: "Release latest"
+      language: bash
+      script:
+        - docker version
+    
+    - stage: release
+      name: "Release by tag"
       language: bash
       if: tag IS present
       script:
