@@ -4,27 +4,40 @@ jobs:
       name: "Test backend"
       language: java
       jdk: openjdk8
+      cache:
+        directories:
+        - target
+      before_cache:
+        - rm -r target/build.log
       script:
         - java -version
-        - echo "Build success" > backend.log
+        - mkdir -p target
+        - echo "Build success" > target/build.log
 
     - stage: test
       name: "Test frontend"
       language: node_js
       node_js:
         - "8"
+      cache:
+        npm: true
+        directories:
+        - frotend
+      before_cache:
+        - rm -r frotend/build.log
       script:
         - npm -v
         - yarn -v
-        - echo "Build success" > frontend.log
+        - mkdir -p frontend
+        - echo "Build success" > frontend/build.log
         
     - stage: release
       name: "Release latest"
       language: bash
       script:
         - docker version
-        - cat backend.log
-        - cat frontend.log
+        - cat target/build.log
+        - cat frontend/build.log
     
     - stage: release
       name: "Release the artifact by tag"
