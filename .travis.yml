@@ -20,6 +20,8 @@ jobs:
         - "8"
       cache:
         npm: true
+        directories:
+          - frotend
       script:
         - npm -v
         - yarn -v
