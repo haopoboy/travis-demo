@@ -1,7 +1,7 @@
 cache:
   directories:
   - target
-  - frotend
+  - frontend
   
 jobs:
   include:
@@ -21,7 +21,7 @@ jobs:
       cache:
         npm: true
         directories:
-          - frotend
+          - frontend
       script:
         - npm -v
         - yarn -v
