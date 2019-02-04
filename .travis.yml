@@ -23,8 +23,8 @@ jobs:
       language: bash
       script:
         - docker version
-        - echo backend.log
-        - echo frontend.log
+        - cat backend.log
+        - cat frontend.log
     
     - stage: release
       name: "Release the artifact by tag"
