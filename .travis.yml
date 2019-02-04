@@ -2,9 +2,6 @@ cache:
   directories:
   - target
   - frotend
-before_cache:
-  - rm -rf target
-  - rm -rf frotend
   
 jobs:
   include:
