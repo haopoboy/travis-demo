@@ -11,7 +11,6 @@ jobs:
       jdk: openjdk8
       script:
         - java -version
-        - mkdir -p target
         - echo "Build success" > target/build.log
         
     - stage: test
@@ -24,7 +23,6 @@ jobs:
       script:
         - npm -v
         - yarn -v
-        - mkdir -p frontend
         - echo "Build success" > frontend/build.log
         
     - stage: release
