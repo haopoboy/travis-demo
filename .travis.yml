@@ -16,5 +16,11 @@ jobs:
         - npm -v
         - yarn -v
         
+    - stage: release
+      language: bash
+      if: tag IS present
+      script:
+        - docker version
+        
 notifications:
   email: false
