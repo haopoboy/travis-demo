@@ -1,17 +1,16 @@
-cache:
-  directories:
-  - target
-  - frontend
-  
 jobs:
   include:
     - stage: test
       name: "Test backend"
       language: java
       jdk: openjdk8
+      cache:
+        directories:
+          - .autoconf
+          - $HOME/.m2
       script:
         - java -version
-        - echo "Build success" > target/build.log
+        - mkdir -p target && echo "Build success" > target/build.log
         
     - stage: test
       name: "Test frontend"
@@ -19,21 +18,29 @@ jobs:
       node_js:
         - "8"
       cache:
-        npm: true
         directories:
-          - frontend
+          - frontend/node_modules
+      before_script:
+        - cd frontend
       script:
         - npm -v
         - yarn -v
-        - echo "Build success" > frontend/build.log
+        - echo "Build success" > build.log
+        
+    - stage: package
+      name: "Package frontend and backend"
+      language: bash
+      script:
+        - cat target/build.log
+        - cat frontend/dist/build.log
+        - echo "Package success" > package.log
         
     - stage: release
       name: "Release latest"
       language: bash
       script:
         - docker version
-        - cat target/build.log
-        - cat frontend/build.log
+        - cat package.log
     
     - stage: release
       name: "Release the artifact by tag"
