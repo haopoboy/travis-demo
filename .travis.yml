@@ -1,29 +1,33 @@
 jobs:
   include:
     - stage: test
-      name: "Test java build"
+      name: "Test backend"
       language: java
       jdk: openjdk8
       script:
         - java -version
+        - echo "Build success" > backend.log
 
     - stage: test
-      name: "Test frontend build"
+      name: "Test frontend"
       language: node_js
       node_js:
         - "8"
       script:
         - npm -v
         - yarn -v
+        - echo "Build success" > frontend.log
         
     - stage: release
       name: "Release latest"
       language: bash
       script:
         - docker version
+        - echo backend.log
+        - echo frontend.log
     
     - stage: release
-      name: "Release by tag"
+      name: "Release the artifact by tag"
       language: bash
       if: tag IS present
       script:
