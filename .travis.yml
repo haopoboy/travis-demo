@@ -15,3 +15,6 @@ jobs:
       script:
         - npm -v
         - yarn -v
+        
+notifications:
+  email: false
