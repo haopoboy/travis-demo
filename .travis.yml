@@ -10,6 +10,7 @@ jobs:
           - $HOME/.m2
       script:
         - java -version
+        - mvn -v
         - mkdir -p target && echo "Build success" > target/build.log
         
     - stage: test
